@@ -1,0 +1,162 @@
+﻿<UserControl xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"  x:Class="Employee_Training.Views.NewEmployeeView"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Employee_Training.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="620">
+   
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="5">Search:</TextBlock>
+            <ComboBox Grid.Row="1" Grid.Column="0" Margin="5" IsEditable="True" IsTextSearchEnabled="True" IsDropDownOpen="False"
+                x:Name="SearchEmployees" ItemsSource="{Binding Path=AvailableEmployees}" SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}" DisplayMemberPath="FullName"/>
+            <ToggleButton x:Name="Edit" Grid.Row="1" Grid.Column="1" Margin="5" Width="85" Content="{Binding ModeSwitch}" IsChecked="{Binding IsSelected}" HorizontalAlignment="Left"/>
+        </Grid>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="FullName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5 10 5 0" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold"/>
+            <CheckBox x:Name="InActiveChk" Grid.Row="0" Grid.Column="2" Margin="5 10 5 5" HorizontalAlignment="Right" 
+                IsChecked="{Binding Status, Mode=TwoWay}">InActive</CheckBox>
+            <TextBlock Text="First Name:"  Grid.Row="1" Grid.Column="0" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <TextBox x:Name="FirstName"  Grid.Row="2" Grid.Column="0" Margin="5" Text="{Binding FirstName, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Last Name:" Grid.Row="3" Grid.Column="0" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <TextBox x:Name="LastName" Grid.Row="4"  Grid.Column="0" Margin="5" Text="{Binding LastName, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Hire Date:" Grid.Row="1" Grid.Column="1" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <DatePicker x:Name="HireDatePick"  Grid.Row="2" Grid.Column="1" Margin="5 5" SelectedDate="{Binding HireDate, Mode=TwoWay}"/>
+            <TextBlock Text="Review Date:" Grid.Row="3" Grid.Column="1" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <DatePicker x:Name="ReviewDatePick"  Grid.Row="4" Grid.Column="1" Margin="5 5" SelectedDate="{Binding ReviewDate, Mode=TwoWay}"/>
+            <TextBlock Text="Notes:" Grid.Row="1" Grid.Column="2" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Notes:" Grid.Row="1" Grid.Column="2" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <TextBox x:Name="Notes" Grid.Row="2" Grid.Column="2" Grid.RowSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Margin="5" 
+                AcceptsTab="True" SpellCheck.IsEnabled="True" VerticalScrollBarVisibility="Auto"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <!--<ColumnDefinition Width="*"/>-->
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Position:"  Grid.Row="0" Grid.Column="0" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <!--<DataGrid x:Name="Positions" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Positions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                  AutoGenerateColumns="False" Height="130" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="false">
+            </DataGrid>-->
+            <dxg:GridControl x:Name="Positions" Grid.Row="1" Grid.Column="0" Height="130" Margin="10" ItemsSource="{Binding Positions, Mode=TwoWay}">
+                <dxg:GridColumn FieldName="TitleId" Header="Title" SortOrder="Ascending" VisibleIndex="1" SortIndex="1" Width="150">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Titles}" DisplayMember="TitleName" ValueMember="Id"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="PositionDate" Header="Position Date" VisibleIndex="2" SortIndex="0" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowTotalSummary="False" ShowGroupPanel="True" AutoWidth="True" NewItemRowPosition="Top"
+                                   EnableImmediatePosting="True"/>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+
+            <TextBlock Text="Training:"  Grid.Row="2" Grid.Column="0" Margin="5 10 5 0" HorizontalAlignment="Left"/>
+            <!--<DataGrid x:Name="TrainingInitialize" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Trainings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                  AutoGenerateColumns="False" Height="130" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="false">
+            </DataGrid>-->
+            <dxg:GridControl x:Name="Trainings" Grid.Row="3" Grid.Column="0" Height="130" Margin="10" ItemsSource="{Binding Trainings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                <dxg:GridColumn FieldName="DeptId" Header="Department">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Departments}" ValueMember="Id" DisplayMember="DeptName" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="FunctId" Header="Function">
+                    <dxg:GridColumn.CellTemplate>
+                        <DataTemplate>
+                            <dxg:LookUpEdit Name="PART_Editor" ItemsSource="{Binding View.DataContext.Functions}" ValueMember="Id" DisplayMember="FunctName" />
+                        </DataTemplate>
+                    </dxg:GridColumn.CellTemplate>
+                </dxg:GridColumn>
+
+                
+                <!--<dxg:GridColumn FieldName="DeptId" Header="Department" SortOrder="Ascending" VisibleIndex="0" SortIndex="1" Width="150">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Departments}" DisplayMember="DeptName" ValueMember="Id"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="FunctId" Header="Function" SortOrder="Ascending" VisibleIndex="1" SortIndex="2" Width="150">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding Functions}" DisplayMember="FunctionName" ValueMember="Id"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>-->
+                <dxg:GridColumn FieldName="AcquiredDate" Header="Acquired Date" VisibleIndex="2" SortIndex="0" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:DateEditSettings/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Status" IsSmart="True" VisibleIndex="3" SortIndex="3" Width="75" FixedWidth="true"/>
+                <dxg:GridColumn FieldName="Notes" IsSmart="True" VisibleIndex="4" SortIndex="4"/>
+               
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowTotalSummary="False" ShowGroupPanel="True" AutoWidth="True" NewItemRowPosition="Top"/>
+                    <!--CellValueChanged="TableViewCellValueChanged" ShownEditor="OnTableViewShownEditor" HiddenEditor="TableVieHiddenEditor"/>-->               
+                    <!--CellValueChanged="TableViewCellValueChanged" ShownEditor="OnTableViewShownEditor" HiddenEditor="TableVieHiddenEditor"/>-->
+                </dxg:GridControl.View>
+
+            </dxg:GridControl>
+
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="Save" Grid.Row="0" Grid.Column="0" Margin="10 5 5 5" Width="100">Save</Button>
+            <Button x:Name="Reset" Grid.Row="0" Grid.Column="1" Margin="5 5" Width="100">Reset</Button>
+            <Button x:Name="Cancel" Grid.Row="0" Grid.Column="2" Margin="5 5" Width="100">Cancel</Button>
+        </Grid>
+
+    </StackPanel>
+</UserControl>
