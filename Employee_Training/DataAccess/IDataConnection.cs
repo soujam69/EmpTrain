@@ -8,6 +8,8 @@ namespace Employee_Training.DataAccess
     {
         EmployeeModel CreateEmployee(EmployeeModel em);
         TrainingModel CreateTraining(TrainingModel tm);
+        DepartmentModel CreateDepartment(DepartmentModel dm);
+        FunctionModel CreateFunction(FunctionModel fm);
         List<DepartmentModel> GetAllDepartments();
         List<EmployeeModel> GetAllEmployees();
         List<EmployeeModel> GetFullEmployeeInfo();

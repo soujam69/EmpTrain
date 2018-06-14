@@ -166,7 +166,7 @@ namespace Employee_Training.ViewModels
             //        ActiveItem.TryClose();
             //    }
 
-            ActivateItem(new MassTrainViewModel());
+            ActivateItem(new DeptFunctViewModel());
             CanMassTrain = false;
             CanEditEmployee = false;
             CanOpenReports = false;

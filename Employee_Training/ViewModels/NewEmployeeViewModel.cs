@@ -180,7 +180,7 @@ namespace Employee_Training.ViewModels
 
         public BindableCollection<EmployeeModel> AvailableEmployees
         {
-            get { return _AvailableEmployees; ; }
+            get { return _AvailableEmployees; }
             set { _AvailableEmployees = value; }
         }
 

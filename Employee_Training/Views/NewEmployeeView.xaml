@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Employee_Training.Views"
+             xmlns:self="clr-namespace:Employee_Training.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="620">
    
@@ -89,8 +89,7 @@
                 </dxg:GridColumn>
 
                 <dxg:GridControl.View>
-                    <dxg:TableView ShowTotalSummary="False" ShowGroupPanel="True" AutoWidth="True" NewItemRowPosition="Top"
-                                   EnableImmediatePosting="True"/>
+                    <dxg:TableView ShowTotalSummary="False" ShowGroupPanel="True" AutoWidth="True" NewItemRowPosition="Top"/>
                 </dxg:GridControl.View>
             </dxg:GridControl>
 
@@ -99,7 +98,8 @@
                   AutoGenerateColumns="False" Height="130" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"
                   CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="false">
             </DataGrid>-->
-            <dxg:GridControl x:Name="Trainings" Grid.Row="3" Grid.Column="0" Height="130" Margin="10" ItemsSource="{Binding Trainings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <dxg:GridControl x:Name="Trainings" Grid.Row="3" Grid.Column="0" Height="130" 
+                             Margin="10" ItemsSource="{Binding Trainings, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                 <dxg:GridColumn FieldName="DeptId" Header="Department">
                     <dxg:GridColumn.EditSettings>
                         <dxe:ComboBoxEditSettings ItemsSource="{Binding Departments}" ValueMember="Id" DisplayMember="DeptName" />
@@ -108,7 +108,9 @@
                 <dxg:GridColumn FieldName="FunctId" Header="Function">
                     <dxg:GridColumn.CellTemplate>
                         <DataTemplate>
-                            <dxg:LookUpEdit Name="PART_Editor" ItemsSource="{Binding View.DataContext.Functions}" ValueMember="Id" DisplayMember="FunctName" />
+                            <dxe:ComboBoxEdit Name="PART_Editor" ItemsSource="{Binding View.DataContext.Functions}" 
+                                            FilterCriteria="{Binding RowData.Row.DeptId, Converter={self:Converter}}"
+                                            ValueMember="Id" DisplayMember="FunctionName" />
                         </DataTemplate>
                     </dxg:GridColumn.CellTemplate>
                 </dxg:GridColumn>

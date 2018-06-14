@@ -9,9 +9,40 @@ namespace Employee_Training.DataAccess
 {
     public class SqlConnector : IDataConnection
     {
+        public DepartmentModel CreateDepartment(DepartmentModel dm)
+        {
+            using (IDbConnection db = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectDB("EmpTrainingDB")))
+            {
+                var p = new DynamicParameters();
+                //Add Department
+                p.Add("@DeptName", dm.DeptName);
+
+                //Dept Id from Database
+                p.Add("@Id", 0, DbType.Int32, direction: ParameterDirection.Output);
+
+                db.Execute("dbo.spDept_Insert", p, commandType: CommandType.StoredProcedure);
+
+                dm.Id = p.Get<int>("@Id");
+
+                foreach (FunctionModel fm in dm.Functions)
+                {
+                    p = new DynamicParameters();
+                    p.Add("@DeptId", dm.Id);
+                    p.Add("@FunctionName", fm.FunctionName);
+                    p.Add("@RenewalMonths", fm.RenewalMonths);
+
+                    //Dept Id from Database
+                    p.Add("@Id", 0, DbType.Int32, direction: ParameterDirection.Output);
+
+                    db.Execute("dbo.spFunct_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            return dm;
+        }
+
         public EmployeeModel CreateEmployee(EmployeeModel em)
         {
-            using (IDbConnection db = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectDB("OutTurnDB")))
+            using (IDbConnection db = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectDB("EmpTrainingDB")))
             {
                 var p = new DynamicParameters();
                 //Employee Id from Database
@@ -44,7 +75,7 @@ namespace Employee_Training.DataAccess
                     p.Add("@EmpId", em.Id);
                     p.Add("@DeptId", item.DeptId);
                     p.Add("@FunctId", item.FunctId);
-                    p.Add("@AquireDate", item.AquiredDate);
+                    p.Add("@AcquireDate", item.AcquiredDate);
                     p.Add("@Status", item.Status);
                     p.Add("@Notes", item.Notes);
 
@@ -55,16 +86,21 @@ namespace Employee_Training.DataAccess
             return em;
         }
 
+        public FunctionModel CreateFunction(FunctionModel fm)
+        {
+            throw new NotImplementedException();
+        }
+
         public TrainingModel CreateTraining(TrainingModel tm)
         {
-            using (IDbConnection db = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectDB("OutTurnDB")))
+            using (IDbConnection db = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectDB("EmpTrainingDB")))
             {
                 var p = new DynamicParameters();
                 //Add Training
                 p.Add("@EmpId", tm.EmpId);
                 p.Add("@DeptId", tm.DeptId);
                 p.Add("@FunctId", tm.FunctId);
-                p.Add("@AquiredDate", tm.AquiredDate);
+                p.Add("@AcquiredDate", tm.AcquiredDate);
                 p.Add("@Notes", tm.Notes);
 
                 db.Execute("dbo.spTraining_Insert", p, commandType: CommandType.StoredProcedure);

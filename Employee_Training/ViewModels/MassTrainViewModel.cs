@@ -274,7 +274,7 @@ namespace Employee_Training.ViewModels
             foreach (var item in SelectedEmployees)
             {
                 tm.EmpId = item.Id;
-                tm.AquiredDate = AquiredDate;
+                tm.AcquiredDate = AquiredDate;
                 tm.DeptId = SelectedFunction.DeptId;
                 tm.FunctId = SelectedFunction.Id;
                 tm.Notes = Notes;

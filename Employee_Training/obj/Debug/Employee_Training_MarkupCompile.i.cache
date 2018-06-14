@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Temp\Employee_Training\Employee_Training\obj\Debug\
+C:\Users\Jamey\OneDrive - fibreconverters.com\Visual Studio 2017\Projects\Employee_Training\Employee_Training\obj\Debug\
 Employee_Training
 none
 false
 DEBUG;TRACE
-C:\Temp\Employee_Training\Employee_Training\App.xaml
-5641252561
+C:\Users\Jamey\OneDrive - fibreconverters.com\Visual Studio 2017\Projects\Employee_Training\Employee_Training\App.xaml
+7902629662
 
-35-588566825
-95-496126247
-Views\EditEmployeeView.xaml;Views\MassTrainView.xaml;Views\NewEmployeeView.xaml;Views\ReportView.xaml;Views\ShellView.xaml;
+35-1846261506
+96421086183
+Views\DeptFunct1View.xaml;Views\DeptFunctView.xaml;Views\EditEmployeeView.xaml;Views\MassTrainView.xaml;Views\NewEmployeeView.xaml;Views\ReportView.xaml;Views\ShellView.xaml;
 
-True
+False
 

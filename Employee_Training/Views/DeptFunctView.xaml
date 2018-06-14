@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="Employee_Training.Views.DeptFunctView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:ViewModels="clr-namespace:Employee_Training.ViewModels"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="600">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <ToggleButton x:Name="DeptFunctToggle" Grid.Row="0" Grid.Column="1" Margin="5" Height="25" Width="85" Content="{Binding ModeSwitch}" IsChecked="{Binding IsSelected}" HorizontalAlignment="Left"/>
+
+            <!--Row 01-->
+            <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Grid.ColumnSpan="1" FontWeight="Bold">Add Department:</TextBlock>
+
+            <!--Row 02-->
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Dept Name:</TextBlock>
+            <TextBox x:Name="DeptName" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Left" Width="200" 
+                     Text="{Binding DeptName, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"
+                     IsEnabled="{Binding CanDeptName}"/>
+
+            <!-- Row 03 -->
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Margin="5" HorizontalAlignment="Center">
+                <Button x:Name="SaveAll" Width="60" Margin="0 0 5 0">Save</Button>
+
+                <Button x:Name="DeleteDept" Width="60" Margin="5 0 5 0">Delete</Button>
+                <Button x:Name="CancelDept" Width="60" Margin="5 0 0 0">Cancel</Button>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Row 00-->
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="5" FontWeight="Bold">Select Department:</TextBlock>
+
+            <!-- Row 01 -->
+            <ListBox x:Name="AvailableDepartmentsInitialize" Grid.Row="1" Grid.Column="0" Margin="5" Height="200" Width="250" VerticalAlignment="Top"
+                 ItemsSource="{Binding AvailableDepartments}" DisplayMemberPath="DeptName" SelectedItem="{Binding SelectedDepartment}" />
+
+            <!-- Row 02 -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="5" Grid.ColumnSpan="1" FontWeight="Bold">Functions:</TextBlock>
+
+            <!-- Row 03 -->
+            <!--
+        <TextBlock Grid.Row="7" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Function Name:</TextBlock>
+        <TextBox x:Name="AddFunction"  Grid.Row="7" Grid.Column="1" Margin="5" HorizontalAlignment="Left" Width="200" Text="{Binding AddFunction, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>
+        
+        -->
+            <!-- Row 08 -->
+            <!--
+        <TextBlock Grid.Row="8" Grid.Column="0" Margin="5">Renewal Months:</TextBlock>
+        <TextBox x:Name="RenewalMonths"  Grid.Row="8" Grid.Column="1" Margin="5" HorizontalAlignment="Left" Width="200" Text="{Binding AddFunction, TargetNullValue='', UpdateSourceTrigger=PropertyChanged}"/>-->
+
+            <!-- Row 09 -->
+            <!--<StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="1" Margin="5" HorizontalAlignment="Center">
+            <Button x:Name="SaveFunct" Width="60" Margin="0 0 5 0">Add</Button>
+            <Button x:Name="DeleteFunct" Width="60" Margin="5 0 5 0">Delete</Button>
+            <Button x:Name="CancelFunct" Width="60" Margin="5 0 0 0">Cancel</Button>
+        </StackPanel>-->
+
+            <!-- Row 10 -->
+            <!--<TextBlock Grid.Row="10" Grid.Column="1" Margin="5" FontWeight="Bold">Select Function:</TextBlock>-->
+
+            <!--Department/Function Row 06-->
+            <!--<dxe:ComboBoxEdit Grid.Row="6" Grid.Column="1" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" 
+                          ItemsSource="{Binding AvailableDepartments}" DisplayMember="DeptName" SelectedItem="{Binding SelectedDepartment}" />-->
+            <!--<dxe:ComboBoxEdit Grid.Row="6" Grid.Column="3" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" 
+                          ItemsSource="{Binding AvailableFunctions}" DisplayMember="FunctionName" SelectedItem="{Binding SelectedFunction}" />-->
+
+
+            <!-- Row 03 -->
+            <!--<DataGrid x:Name="AvailableFunctionsInitialize" Grid.Row="3" Grid.Column="0" Height="130" Margin="10" ItemsSource="{Binding AvailableFunctions, Mode=TwoWay}"
+                         SelectedItem="{Binding SelectedFunction}" AutoGenerateColumns="False" CanUserAddRows="true" CanUserDeleteRows="true">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="cal:Message.Attach" Value="[MouseDoubleClick] = [Action RowSelect($dataContext)]"/>
+                    </Style>
+                </DataGrid.RowStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Functions" Binding="{Binding FunctionName}" Width="Auto" />
+                    <DataGridTextColumn Header="Renewal Months" Binding="{Binding RenewalMonths}" Width="Auto" />
+                </DataGrid.Columns>
+  
+            </DataGrid>-->
+            <dxg:GridControl x:Name="AvailableFunctionsInitialize" Grid.Row="3" Grid.Column="0" Height="130" Margin="10" ItemsSource="{Binding AvailableFunctions, Mode=TwoWay}"
+                         SelectedItem="{Binding SelectedFunction}">
+                <dxg:GridColumn FieldName="FunctionName" Header="Function" SortOrder="Ascending" VisibleIndex="1" SortIndex="1" Width="150"/>
+                <dxg:GridColumn FieldName="RenewalMonths" Header="Renewal Months" VisibleIndex="2" SortIndex="0"/>
+                <dxg:GridControl.View>
+                    <dxg:TableView ShowTotalSummary="False" ShowGroupPanel="False" AutoWidth="True" NewItemRowPosition="Top">
+                        <dxg:TableView.RowCellMenuCustomizations>
+                            <dxb:BarButtonItem Name="deleteRowItem" Content="Delete" Command="{x:Static dxg:GridCommands.DeleteFocusedRow}" />
+                        </dxg:TableView.RowCellMenuCustomizations>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+            </dxg:GridControl>
+        </Grid>
+    </StackPanel>
+</UserControl>

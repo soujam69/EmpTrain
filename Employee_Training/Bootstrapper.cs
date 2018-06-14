@@ -25,7 +25,7 @@ namespace Employee_Training
             container.Singleton<IEventAggregator, EventAggregator>();
             container.Singleton<ShellViewModel>();
             container.Singleton<NewEmployeeViewModel>();
-            //container.Singleton<EditViewModel>();
+            //container.Singleton<DeptFunctViewModel>();
             //container.Singleton<ReportsViewModel>();
             //container.Singleton<EditSearchViewModel>();
         }

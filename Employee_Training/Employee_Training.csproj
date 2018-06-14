@@ -37,14 +37,17 @@
     <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="Caliburn.Micro.DevExpress, Version=0.6.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.DevExpress.0.6.0.7\lib\net40-Client\Caliburn.Micro.DevExpress.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro.Platform, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Platform.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.3.2.0\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Charts.v17.2.Core, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -100,6 +103,7 @@
     <Compile Include="DataAccess\IDataConnection.cs" />
     <Compile Include="DataAccess\SqlConnector.cs" />
     <Compile Include="GlobalConfig.cs" />
+    <Compile Include="Helpers\Converter.cs" />
     <Compile Include="Helpers\DevExpressGrid.cs" />
     <Compile Include="Helpers\EventAggregationProvider.cs" />
     <Compile Include="Helpers\ComboBoxEventArgsConverter.cs" />
@@ -122,20 +126,15 @@
     <Compile Include="Reports\EmpTrainRpt.Designer.cs">
       <DependentUpon>EmpTrainRpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DeptFunctViewModel.cs" />
     <Compile Include="ViewModels\EditEmployeeViewModel.cs" />
     <Compile Include="ViewModels\MassTrainViewModel.cs" />
     <Compile Include="ViewModels\NewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\ReportShowViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\EditEmployeeView.xaml.cs">
-      <DependentUpon>EditEmployeeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MassTrainView.xaml.cs">
-      <DependentUpon>MassTrainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ReportView.xaml.cs">
-      <DependentUpon>ReportView.xaml</DependentUpon>
+    <Compile Include="Views\DeptFunct1View.xaml.cs">
+      <DependentUpon>DeptFunct1View.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +168,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\DeptFunct1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeptFunctView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
