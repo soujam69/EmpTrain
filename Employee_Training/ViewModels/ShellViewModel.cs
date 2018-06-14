@@ -17,7 +17,7 @@ namespace Employee_Training.ViewModels
             GlobalConfig.InitializeConnection();
 
             EventAggregationProvider.OutTurnEventAggregator.Subscribe(this);
-            ActivateItem(new NewEmployeeViewModel());
+            ActivateItem(new DeptFunctViewModel());
         }
 
         private Screen _CurrentViewModel;
